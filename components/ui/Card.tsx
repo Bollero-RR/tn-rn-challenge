@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components/native';
 const Card = styled.View`
   background-color: #fff;
   margin-bottom: 20px;
-  padding: 20px 16px 4px 16px;
+  padding: 20px;
   border-radius: 8px;
   justify-content: center;
   ${Platform.OS === 'ios'

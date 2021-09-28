@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { CustomTab } from '../components/common';
+import { NAVIGATOR } from '../utils/navigation';
+import AccountScreen from './AccountSection';
+import PartnerScreen from './PartnersSection';
 
 /**
  * ToDo: Create a Bottom Tab Navigation for: Account and Partners sections
@@ -11,79 +13,34 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
  * 💯 Published apps where you been involved is great plus
  */
 
-export default function WalletScreen() {
+const BottomTab = createBottomTabNavigator();
+
+const WalletTabs = () => {
   return (
-    <View>
-      <AccountSection />
-      <PartnersSection />
-    </View>
+    <BottomTab.Navigator
+      initialRouteName={NAVIGATOR.WalletTabs.Account}
+      tabBarOptions={{
+        showLabel: false,
+      }}
+    >
+      <BottomTab.Screen
+        options={{
+          tabBarLabel: 'Account',
+          tabBarIcon: ({ focused }) => <CustomTab text="Account" isFocused={focused} />,
+        }}
+        name={NAVIGATOR.WalletTabs.Account}
+        component={AccountScreen}
+      />
+      <BottomTab.Screen
+        options={{
+          tabBarLabel: 'Partners',
+          tabBarIcon: ({ focused }) => <CustomTab text="Partners" isFocused={focused} />,
+        }}
+        name={NAVIGATOR.WalletTabs.Partners}
+        component={PartnerScreen}
+      />
+    </BottomTab.Navigator>
   );
-}
+};
 
-function AccountSection() {
-  return (
-    <View style={styles.container}>
-      <Image style={styles.illustration} source={require('../assets/finish-illustration.png')} />
-      <Text style={styles.title}>Hello, $contextName</Text>
-      <Text>Glad you are here,</Text>
-      <Text>hope to see you soon.</Text>
-    </View>
-  );
-}
-
-function PartnersSection() {
-  const partnerList = [
-    { name: 'App1', url: '#', comments: 'Description of the application and what you did.' },
-    { name: 'App2', url: '#', comments: 'Description of the application and what you did.' },
-    { name: 'App3', url: '#', comments: 'Description of the application and what you did.' },
-  ];
-
-  const ListItem = ({ item }) => {
-    return (
-      <View style={styles.itemContainer}>
-        <Text>{item.name}</Text>
-        <Text>{item.comments}</Text>
-        <Text>URL: {item.url}</Text>
-      </View>
-    );
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Partners</Text>
-      <Text>Some apps I was involved:</Text>
-      {partnerList && partnerList.length > 0 ? (
-        <ScrollView>
-          {partnerList.map((item) => (
-            <ListItem key={item.name} item={item} />
-          ))}
-        </ScrollView>
-      ) : (
-        <Text>No Apps 🙈</Text>
-      )}
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 12,
-  },
-  illustration: {
-    width: 256,
-    height: 160,
-  },
-  itemContainer: {
-    display: 'flex',
-    backgroundColor: '#fff',
-    marginVertical: 6,
-    padding: 8,
-  },
-});
+export default WalletTabs;

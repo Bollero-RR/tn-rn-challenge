@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import { Item } from '../../interfaces/item';
 import { moneyFormatter } from '../../utils/moneyFormatter';
-import { Arrow } from '../icons/Arrow';
+import { Arrow } from '../icons';
 import { Typo, Badge, Card } from '../ui';
 
 const DetailsContainer = styled.View`
@@ -23,7 +23,7 @@ const CashContainer = styled.View<{ alignItems?: string; marginRight?: number; p
     `};
 `;
 
-const Row = styled.View<{ justifyContent?: string; flex?: number; marginLeft?: number }>`
+const Row = styled.View<{ justifyContent?: string; flex?: number; marginLeft?: number; marginTop?: number }>`
   flex-direction: row;
   justify-content: ${(p) => p.justifyContent ?? 'center'};
   align-items: center;
@@ -36,6 +36,11 @@ const Row = styled.View<{ justifyContent?: string; flex?: number; marginLeft?: n
     p.marginLeft &&
     css`
       margin-left: ${p.marginLeft}px;
+    `};
+  ${(p) =>
+    p.marginTop &&
+    css`
+      margin-top: ${p.marginTop}px;
     `};
 `;
 
@@ -99,7 +104,7 @@ const ItemCard = memo(({ item, handlePress, showDetails = false }: Props) => {
         <DetailsContainer>
           {React.Children.toArray(
             details.map((detail) => (
-              <Row justifyContent="flex-start">
+              <Row marginTop={10} justifyContent="flex-start">
                 <Typo marginLeft={8}>{detail.label}</Typo>
                 <Typo marginLeft={8}>{detail.value}</Typo>
                 {detail.label === 'Market Cap' && (

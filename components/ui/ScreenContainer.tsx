@@ -1,17 +1,19 @@
+import React from 'react';
 import styled, { css } from 'styled-components/native';
-import { SafeAreaView } from './';
+import { SafeAreaView } from './SafeAreaView';
 
 type Props = {
   children?: React.ReactNode | undefined | React.ReactNode[];
   justifyContent?: string;
   alignItems?: string;
+  bgColor?: string;
 };
 
 const Container = styled.View<Omit<Props, 'children'>>`
   flex: 1;
   padding-horizontal: 30px;
   padding-top: 24px;
-  background-color: #f8f8fa;
+  background-color: ${(p) => p.bgColor ?? '#f8f8fa'};
   ${(p) =>
     p.justifyContent &&
     css`
@@ -25,9 +27,9 @@ const Container = styled.View<Omit<Props, 'children'>>`
     `};
 `;
 
-const ScreenContainer = ({ children, justifyContent, alignItems }: Props) => (
-  <SafeAreaView>
-    <Container justifyContent={justifyContent} alignItems={alignItems}>
+const ScreenContainer = ({ children, justifyContent, alignItems, bgColor }: Props) => (
+  <SafeAreaView bgColor={bgColor}>
+    <Container bgColor={bgColor} justifyContent={justifyContent} alignItems={alignItems}>
       {children}
     </Container>
   </SafeAreaView>

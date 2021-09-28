@@ -1,7 +1,7 @@
 import React from 'react';
 import { StackHeaderLeftButtonProps } from '@react-navigation/stack/lib/typescript/src/types';
 import styled from 'styled-components/native';
-import GoBack from '../icons/GoBack';
+import { GoBack } from '../icons';
 import { Typo } from '../ui';
 
 const HeaderLeftContainer = styled.TouchableOpacity`

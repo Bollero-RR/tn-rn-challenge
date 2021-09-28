@@ -4,9 +4,9 @@ import styled from 'styled-components/native';
 const Input = styled.TextInput`
   color: white;
   border-width: 1px;
-  border-color: black;
+  border-color: #d1d5db;
   border-radius: 5px;
-  color: black;
+  color: #0a132c;
   padding: 10px;
   width: 100%;
 `;
@@ -14,7 +14,7 @@ const Input = styled.TextInput`
 const Container = styled.View``;
 
 const Error = styled.Text`
-  color: red;
+  color: #f33a3a;
   font-size: 12px;
   padding-vertical: 5px;
 `;
@@ -32,6 +32,7 @@ const TextField = ({ placeholder, type, onChangeText, onBlur, value, errorMessag
   return (
     <Container>
       <Input
+        selectionColor="#1FC4DB"
         placeholder={placeholder}
         secureTextEntry={type === 'password'}
         onChangeText={onChangeText}
