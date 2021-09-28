@@ -28,7 +28,7 @@ export default function ListScreen({ route }: DetailScreenProps) {
 
   return (
     <ScreenContainer>
-      <ItemCard item={item} showDetails />
+      {item && <ItemCard item={item} showDetails />}
       <Button text="My Wallet" handlePress={navigateToWalletScreen} />
     </ScreenContainer>
   );

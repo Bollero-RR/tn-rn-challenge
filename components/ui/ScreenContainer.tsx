@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native';
 import { SafeAreaView } from './';
 
 type Props = {
-  children: JSX.Element | JSX.Element[];
+  children?: React.ReactNode | undefined | React.ReactNode[];
   justifyContent?: string;
   alignItems?: string;
 };

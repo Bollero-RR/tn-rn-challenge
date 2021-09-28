@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, ScrollView } from 'react-native';
+import React from 'react';
+import { ScrollView } from 'react-native';
 import { useNavigationHooks } from '../hooks/useNavigationHooks';
 import { useItems } from '../hooks/useItems';
 import { ItemCard, LoadingIndicator, ErrorStateView } from '../components/common';
-import { SafeAreaView, ScreenContainer } from '../components/ui';
+import { ScreenContainer } from '../components/ui';
 /**
  * ToDo: Feed the list using fetching data from a RESTful API
  *
