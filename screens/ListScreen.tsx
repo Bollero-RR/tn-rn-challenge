@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import { useNavigationHooks } from '../hooks/useNavigationHooks';
 import { useItems } from '../hooks/useItems';
 import { ItemCard, LoadingIndicator, ErrorStateView } from '../components/common';
 import { ScreenContainer } from '../components/ui';
+
 /**
  * ToDo: Feed the list using fetching data from a RESTful API
  *
@@ -23,15 +24,13 @@ export default function ListScreen() {
 
   if (isError) return <ErrorStateView />;
 
-  //To.Do implement FlatList instead of ScrollView for showing ScrollView.
-
   return (
     <ScreenContainer>
-      <ScrollView>
-        {items?.map((item) => (
-          <ItemCard key={item.id} item={item} handlePress={() => navigateToDetailScreen(item.id)} />
-        ))}
-      </ScrollView>
+      <FlatList
+        data={items}
+        renderItem={({ item }) => <ItemCard item={item} handlePress={() => navigateToDetailScreen(item.id)} />}
+        keyExtractor={(item) => item.name}
+      />
     </ScreenContainer>
   );
 }
