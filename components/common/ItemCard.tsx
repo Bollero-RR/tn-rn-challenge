@@ -41,7 +41,7 @@ const Row = styled.View<{ justifyContent?: string; flex?: number; marginLeft?: n
 
 type Props = {
   handlePress?: () => void;
-  item: Item;
+  item?: Item;
   showDetails?: boolean;
 };
 
