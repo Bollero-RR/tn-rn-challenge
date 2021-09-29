@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackHeaderLeftButtonProps } from '@react-navigation/stack/lib/typescript/src/types';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { GoBack } from '../icons';
 import { Typo } from '../ui';
 
@@ -11,10 +11,11 @@ const HeaderLeftContainer = styled.TouchableOpacity`
 `;
 
 const HeaderBackButton = (props: StackHeaderLeftButtonProps) => {
+  const { colors } = useTheme();
   return (
     <HeaderLeftContainer onPress={props.onPress}>
       <GoBack />
-      {props.label && <Typo color="#1fc4db">{props.label}</Typo>}
+      {props.label && <Typo color={colors.primary_light}>{props.label}</Typo>}
     </HeaderLeftContainer>
   );
 };

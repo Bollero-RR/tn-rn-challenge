@@ -1,7 +1,7 @@
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Keyboard, View } from 'react-native';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { Button, KeyboardAvoidingView, SafeAreaView, TextField, Typo } from '../components/ui';
 import { useLogin } from '../hooks/useLogin';
 import { useNavigationHooks } from '../hooks/useNavigationHooks';
@@ -17,7 +17,7 @@ import { INPUTS } from '../utils/form/login';
 */
 
 const InputsContainer = styled.View`
-  height: 170px;
+  height: 210px;
   justify-content: space-between;
   padding-vertical: 40px;
   width: 100%;
@@ -25,7 +25,7 @@ const InputsContainer = styled.View`
 
 const Container = styled.Pressable`
   flex: 1;
-  background-color: #ffffff;
+  background-color: ${(p) => p.theme.colors.white};
   align-items: center;
   justify-content: center;
   padding-horizontal: 20px;
@@ -35,6 +35,7 @@ export default function HomeScreen() {
   const { navigateToListScreen } = useNavigationHooks();
   const { handleUser } = useAppState();
   const { mutate: login, isLoading } = useLogin();
+  const { colors } = useTheme();
 
   const {
     control,
@@ -55,7 +56,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView bgColor="#FFFFFF">
+    <SafeAreaView bgColor={colors.white}>
       <KeyboardAvoidingView behavior="padding">
         <Container onPress={Keyboard.dismiss}>
           <View>

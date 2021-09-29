@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { useAppState } from '../providers/useAppState';
 import { ScreenContainer, Typo } from '../components/ui';
 
@@ -17,9 +17,10 @@ const Container = styled.View`
 
 const AccountSection = () => {
   const { user } = useAppState();
+  const { colors } = useTheme();
 
   return (
-    <ScreenContainer bgColor="#FFFFFFFF" alignItems="center" justifyContent="center">
+    <ScreenContainer bgColor={colors.white} alignItems="center" justifyContent="center">
       <Image source={require('../assets/finish-illustration.png')} />
       <Container>
         <Typo isBold sizePx={24}>

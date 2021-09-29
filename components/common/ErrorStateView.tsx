@@ -4,8 +4,8 @@ import { Button, ScreenContainer, Typo } from '../ui';
 
 const ErrorStateView = () => {
   return (
-    <ScreenContainer justifyContent="center" alignItems="center">
-      <Typo>Oops!</Typo>
+    <ScreenContainer justifyContent="space-around" alignItems="center">
+      <Typo isBold>Oops!</Typo>
       <Typo>Something went wrong</Typo>
       <Button text="Reset" handlePress={() => RNRestart.Restart()} />
     </ScreenContainer>

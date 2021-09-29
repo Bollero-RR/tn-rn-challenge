@@ -2,8 +2,9 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { useNavigationHooks } from '../hooks/useNavigationHooks';
 import { useItems } from '../hooks/useItems';
-import { ItemCard, LoadingIndicator, ErrorStateView } from '../components/common';
+import { ItemCard, LoadingIndicator, ErrorStateView, EmptyState } from '../components/common';
 import { ScreenContainer } from '../components/ui';
+import { useTheme } from 'styled-components';
 
 /**
  * ToDo: Feed the list using fetching data from a RESTful API
@@ -19,6 +20,7 @@ import { ScreenContainer } from '../components/ui';
 export default function ListScreen() {
   const { navigateToDetailScreen } = useNavigationHooks();
   const { data: items, isLoading, isError } = useItems();
+  const { colors } = useTheme();
 
   if (isLoading) return <LoadingIndicator />;
 
@@ -28,8 +30,12 @@ export default function ListScreen() {
     <ScreenContainer>
       <FlatList
         data={items}
-        renderItem={({ item }) => <ItemCard item={item} handlePress={() => navigateToDetailScreen(item.id)} />}
-        keyExtractor={(item) => item.name}
+        keyExtractor={(item) => item.id}
+        ListEmptyComponent={EmptyState}
+        renderItem={({ item }) => (
+          <ItemCard item={item} colors={colors} handlePress={() => navigateToDetailScreen(item.id)} />
+        )}
+        showsVerticalScrollIndicator={false}
       />
     </ScreenContainer>
   );

@@ -13,7 +13,7 @@ const Container = styled.View<Omit<Props, 'children'>>`
   flex: 1;
   padding-horizontal: 30px;
   padding-top: 24px;
-  background-color: ${(p) => p.bgColor ?? '#f8f8fa'};
+  background-color: ${(p) => p.bgColor ?? p.theme.colors.lighter_gray};
   ${(p) =>
     p.justifyContent &&
     css`

@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 
 const Input = styled.TextInput`
   color: white;
   border-width: 1px;
-  border-color: #d1d5db;
+  border-color: ${(p) => p.theme.colors.light_gray};
   border-radius: 5px;
-  color: #0a132c;
+  color: ${(p) => p.theme.colors.black};
   padding: 10px;
   width: 100%;
 `;
@@ -14,7 +14,7 @@ const Input = styled.TextInput`
 const Container = styled.View``;
 
 const Error = styled.Text`
-  color: #f33a3a;
+  color: ${(p) => p.theme.colors.red};
   font-size: 12px;
   padding-vertical: 5px;
 `;
@@ -29,10 +29,11 @@ type Props = {
 };
 
 const TextField = ({ placeholder, type, onChangeText, onBlur, value, errorMessage }: Props) => {
+  const { colors } = useTheme();
   return (
     <Container>
       <Input
-        selectionColor="#1FC4DB"
+        selectioncolor={colors.primary_light}
         placeholder={placeholder}
         secureTextEntry={type === 'password'}
         onChangeText={onChangeText}

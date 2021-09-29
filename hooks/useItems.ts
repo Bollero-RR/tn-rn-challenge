@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import { axios } from '../config/api';
+import { Item } from '../interfaces/item';
 import { API_ROUTES, RQ_KEYS } from '../utils/api';
 
 const getItems = async () => {
@@ -12,7 +13,7 @@ const getItems = async () => {
 };
 
 export const useItems = () => {
-  return useQuery<any[], Error>([RQ_KEYS.items], getItems, {
+  return useQuery<Item[], Error>([RQ_KEYS.items], getItems, {
     staleTime: 1000 * 60 * 5,
   });
 };

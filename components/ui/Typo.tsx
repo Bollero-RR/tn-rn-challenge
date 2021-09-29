@@ -10,7 +10,8 @@ type Props = {
 const Typo = styled.Text<Props>`
   font-weight: ${(p) => (p.isBold ? 'bold' : 'normal')};
   font-size: ${(p) => p.sizePx ?? 16}px;
-  color: ${(p) => p.color ?? 'black'};
+  color: ${(p) => p.color ?? p.theme.colors.black};
+
   ${(p) =>
     p.marginLeft &&
     css`

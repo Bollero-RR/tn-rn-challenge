@@ -48,9 +48,10 @@ type Props = {
   handlePress?: () => void;
   item: Item;
   showDetails?: boolean;
+  colors: any;
 };
 
-const ItemCard = memo(({ item, handlePress, showDetails = false }: Props) => {
+const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props) => {
   const formatedPrice = moneyFormatter(parseFloat(item.priceUsd));
   const formatedChangePercent = parseFloat(item.changePercent24Hr);
 
@@ -78,22 +79,22 @@ const ItemCard = memo(({ item, handlePress, showDetails = false }: Props) => {
             <Typo> - </Typo>
             <Typo>{item.name}</Typo>
           </Row>
-          <Typo color="#6B7280">#{item.rank}</Typo>
+          <Typo color={colors.gray}>#{item.rank}</Typo>
         </CashContainer>
         <CashContainer alignItems="flex-end" paddingBottom={16}>
-          <Typo isBold color="#019FB5" sizePx={24}>
+          <Typo isBold color={colors.primary_shadow} sizePx={24}>
             {formatedPrice}
           </Typo>
           <Row flex={1} justifyContent="space-between" marginLeft={6}>
-            <Typo color="#6B7280" sizePx={14}>
+            <Typo color={colors.gray} sizePx={14}>
               USD
             </Typo>
             <Badge type={formatedChangePercent >= 0 ? 'success' : 'error'}>
               <Arrow
-                color={formatedChangePercent >= 0 ? '#10B981' : '#F33A3A'}
+                color={formatedChangePercent >= 0 ? colors.green : colors.red}
                 direction={formatedChangePercent >= 0 ? 'top' : 'bottom'}
               />
-              <Typo isBold sizePx={14} color={formatedChangePercent >= 0 ? '#065F46' : '#A50606'}>
+              <Typo isBold sizePx={14} color={formatedChangePercent >= 0 ? colors.green_bold : colors.red_bold}>
                 {Math.abs(formatedChangePercent).toFixed(1)}%
               </Typo>
             </Badge>
@@ -108,7 +109,7 @@ const ItemCard = memo(({ item, handlePress, showDetails = false }: Props) => {
                 <Typo marginLeft={8}>{detail.label}</Typo>
                 <Typo marginLeft={8}>{detail.value}</Typo>
                 {detail.label === 'Market Cap' && (
-                  <Typo marginLeft={8} color="#6B7280" sizePx={14}>
+                  <Typo marginLeft={8} color={colors.gray} sizePx={14}>
                     USD
                   </Typo>
                 )}

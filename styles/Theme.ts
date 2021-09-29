@@ -1,4 +1,4 @@
-const Colors = {
+export const Colors = {
   white: '#FFFFFF',
   black: '#0A132C',
   primary_light: ' #1FC4DB',
@@ -10,9 +10,10 @@ const Colors = {
   green: ' #10B981',
   green_bold: '#065F46',
   gray: '#6B7280',
-  light_gray: '#F8F8FA',
+  light_gray: '#d1d5db',
+  lighter_gray: '#F8F8FA',
 };
 
 export const theme = {
-  colors: Colors,
+  colors: { ...Colors },
 };

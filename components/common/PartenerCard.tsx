@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/native';
 import { Partner } from '../../interfaces/partner';
+import { ColorsPalette } from '../../interfaces/styled';
 import { Card, Typo } from '../ui';
 
 type Props = {
   item: Partner;
+  colors: ColorsPalette;
 };
 
 const TextContainer = styled.View<{ marginTop?: number }>`
@@ -13,11 +15,11 @@ const TextContainer = styled.View<{ marginTop?: number }>`
   flex-direction: row;
 `;
 
-const PartenerCard = ({ item }: Props) => {
+const PartenerCard = memo(({ item, colors }: Props) => {
   return (
     <Card>
       <TextContainer>
-        <Typo isBold color="#019FB5">
+        <Typo isBold color={colors.primary_shadow}>
           {item.name}
         </Typo>
       </TextContainer>
@@ -26,10 +28,10 @@ const PartenerCard = ({ item }: Props) => {
       </TextContainer>
       <TextContainer marginTop={24}>
         <Typo>URL: </Typo>
-        <Typo color="#6B7280">{item.url}</Typo>
+        <Typo color={colors.gray}>{item.url}</Typo>
       </TextContainer>
     </Card>
   );
-};
+});
 
 export default PartenerCard;

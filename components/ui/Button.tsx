@@ -1,14 +1,14 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import Typo from './Typo';
 
-const Container = styled.TouchableOpacity`
+const Container = styled.TouchableOpacity<{ isLoading?: boolean }>`
   color: white;
   border-radius: 5px;
   padding: 10px;
   width: 100%;
-  background-color: #1fc4db;
+  background-color: ${(p) => (p.isLoading ? p.theme.colors.light_gray : p.theme.colors.primary_light)};
   align-items: center;
   padding-vertical: 9px;
 `;
@@ -21,9 +21,10 @@ type Props = {
 };
 
 const Button = ({ handlePress, text, isLoading }: Props) => {
+  const { colors } = useTheme();
   return (
-    <Container onPress={handlePress} disabled={isLoading}>
-      {isLoading ? <ActivityIndicator color="#000000" /> : <Typo color="#FFFFFF">{text}</Typo>}
+    <Container isLoading={isLoading} onPress={handlePress} disabled={isLoading} accessibilityLabel={`clicked on`}>
+      {isLoading ? <ActivityIndicator color={colors.black} /> : <Typo color={colors.white}>{text}</Typo>}
     </Container>
   );
 };

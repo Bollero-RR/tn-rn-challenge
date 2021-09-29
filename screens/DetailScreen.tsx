@@ -4,6 +4,7 @@ import { DetailScreenProps } from '../interfaces/navigation';
 import { useItemDetails } from '../hooks/useItemDetails';
 import { Button, ScreenContainer } from '../components/ui';
 import { ErrorStateView, ItemCard, LoadingIndicator } from '../components/common';
+import { useTheme } from 'styled-components';
 
 /**
  * ToDo: Feed the list using fetching data from a RESTful API
@@ -21,6 +22,7 @@ export default function ListScreen({ route }: DetailScreenProps) {
 
   const { navigateToWalletScreen } = useNavigationHooks();
   const { data: item, isLoading, isError } = useItemDetails(id);
+  const { colors } = useTheme();
 
   if (isLoading) return <LoadingIndicator />;
 
@@ -28,7 +30,7 @@ export default function ListScreen({ route }: DetailScreenProps) {
 
   return (
     <ScreenContainer>
-      {item && <ItemCard item={item} showDetails />}
+      {item && <ItemCard item={item} showDetails colors={colors} />}
       <Button text="My Wallet" handlePress={navigateToWalletScreen} />
     </ScreenContainer>
   );
