@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import DetailScreen from './screens/DetailScreen';
 import { HeaderBackButton } from './components/common';
 import WalletTabs from './screens/WalletScreen';
+import { LogBox } from 'react-native';
 
 /**
  * Use `HomeScreen` as the initial route
@@ -25,6 +26,7 @@ import WalletTabs from './screens/WalletScreen';
 
 const Stack = createStackNavigator();
 const queryClient = new QueryClient();
+LogBox.ignoreLogs(['Setting a timer']); // This was introduced by React Query. No resolution but to ignore. See => https://github.com/tannerlinsley/react-query/issues/1259
 
 const App = () => {
   return (
@@ -33,10 +35,18 @@ const App = () => {
         <AppStateProvider>
           <NavigationContainer>
             <Stack.Navigator initialRouteName={NAVIGATOR.Home}>
-              <Stack.Screen name={NAVIGATOR.Home} component={HomeScreen} options={{ headerTitle: () => <Logo /> }} />
+              <Stack.Screen
+                name={NAVIGATOR.Home}
+                component={HomeScreen}
+                options={{
+                  headerTitleAlign: 'center',
+                  headerTitle: () => <Logo />,
+                }}
+              />
               <Stack.Screen
                 options={{
                   headerLeft: HeaderBackButton,
+                  headerTitleAlign: 'center',
                 }}
                 name={NAVIGATOR.ToDo}
                 component={ToDoScreen}
@@ -44,6 +54,7 @@ const App = () => {
               <Stack.Screen
                 options={{
                   headerLeft: HeaderBackButton,
+                  headerTitleAlign: 'center',
                 }}
                 name={NAVIGATOR.List}
                 component={ListScreen}
@@ -51,6 +62,7 @@ const App = () => {
               <Stack.Screen
                 options={{
                   headerLeft: HeaderBackButton,
+                  headerTitleAlign: 'center',
                 }}
                 name={NAVIGATOR.Detail}
                 component={DetailScreen}
@@ -58,6 +70,7 @@ const App = () => {
               <Stack.Screen
                 options={{
                   headerLeft: HeaderBackButton,
+                  headerTitleAlign: 'center',
                 }}
                 name={NAVIGATOR.Wallet}
                 component={WalletTabs}

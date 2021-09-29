@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Keyboard, View } from 'react-native';
+import { Keyboard, Platform, TextInput, View } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 import { Button, KeyboardAvoidingView, SafeAreaView, TextField, Typo } from '../components/ui';
 import { useLogin } from '../hooks/useLogin';
 import { useNavigationHooks } from '../hooks/useNavigationHooks';
-import { Form, Input } from '../interfaces/form/login';
+import { Form } from '../interfaces/form/login';
+import { Input } from '../interfaces/form/common';
 import { useAppState } from '../providers/useAppState';
 import { requiredValidation } from '../utils/form/form';
 import { INPUTS } from '../utils/form/login';
@@ -37,6 +38,8 @@ export default function HomeScreen() {
   const { mutate: login, isLoading } = useLogin();
   const { colors } = useTheme();
 
+  const secondInputRef = useRef<TextInput>(null);
+
   const {
     control,
     handleSubmit,
@@ -55,9 +58,13 @@ export default function HomeScreen() {
     });
   };
 
+  const handleFirstInputSubmitEditing = () => {
+    secondInputRef?.current?.focus();
+  };
+
   return (
     <SafeAreaView bgColor={colors.white}>
-      <KeyboardAvoidingView behavior="padding">
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <Container onPress={Keyboard.dismiss}>
           <View>
             <Typo isBold sizePx={24}>
@@ -65,22 +72,38 @@ export default function HomeScreen() {
             </Typo>
           </View>
           <InputsContainer>
+            {/*To.Do creata a controller input component in order to abstract the duplicate logic*/}
             {React.Children.toArray(
               INPUTS.map((input: Input) => (
                 <Controller
                   rules={requiredValidation}
                   control={control}
                   name={input.name}
-                  render={({ field: { onChange, value, onBlur } }) => (
-                    <TextField
-                      onBlur={onBlur}
-                      value={value}
-                      onChangeText={(value) => onChange(value)}
-                      type={input.type}
-                      placeholder={input.placeholder}
-                      errorMessage={errors[input.name]?.message}
-                    />
-                  )}
+                  render={({ field: { onChange, value, onBlur } }) =>
+                    input.name === 'username' ? (
+                      <TextField
+                        onBlur={onBlur}
+                        value={value}
+                        onChangeText={(value) => onChange(value)}
+                        type={input.type}
+                        placeholder={input.placeholder}
+                        errorMessage={errors[input.name]?.message}
+                        blurOnSubmit={false}
+                        returnKeyType="next"
+                        onSubmitEditing={handleFirstInputSubmitEditing}
+                      />
+                    ) : (
+                      <TextField
+                        inputRef={secondInputRef}
+                        onBlur={onBlur}
+                        value={value}
+                        onChangeText={(value) => onChange(value)}
+                        type={input.type}
+                        placeholder={input.placeholder}
+                        errorMessage={errors[input.name]?.message}
+                      />
+                    )
+                  }
                 />
               ))
             )}

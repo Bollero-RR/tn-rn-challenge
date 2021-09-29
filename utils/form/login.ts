@@ -1,4 +1,4 @@
-import { Input } from '../../interfaces/form/login';
+import { Input } from '../../interfaces/form/common';
 
 export const INPUTS: Input[] = [
   {

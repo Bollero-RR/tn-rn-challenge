@@ -7,6 +7,7 @@ type Props = {
   marginLeft?: number;
 };
 
+//To.Do update this component to not rely on Color prop from component.
 const Typo = styled.Text<Props>`
   font-weight: ${(p) => (p.isBold ? 'bold' : 'normal')};
   font-size: ${(p) => p.sizePx ?? 16}px;

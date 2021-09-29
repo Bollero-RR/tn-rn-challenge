@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import { Item } from '../../interfaces/item';
-import { moneyFormatter } from '../../utils/moneyFormatter';
-import { Arrow } from '../icons';
-import { Typo, Badge, Card } from '../ui';
+import { formatter } from '../../utils/moneyFormatter';
+import { Typo, Card } from '../ui';
+import ItemBadge from './ItemBadge';
 
 const DetailsContainer = styled.View`
   padding-bottom: 16px;
@@ -52,23 +52,28 @@ type Props = {
 };
 
 const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props) => {
-  const formatedPrice = moneyFormatter(parseFloat(item.priceUsd));
+  const formatedPrice = formatter(parseFloat(item.priceUsd));
   const formatedChangePercent = parseFloat(item.changePercent24Hr);
 
   const details = [
     {
       label: 'Supply',
-      value: moneyFormatter(parseFloat(item.priceUsd), 'US$'),
+      value: formatter(parseFloat(item.supply)),
     },
     {
       label: 'Max Supply',
-      value: moneyFormatter(parseFloat(item.priceUsd), 'US$'),
+      value: item.maxSupply ? formatter(parseFloat(item.maxSupply)) : '-',
     },
     {
       label: 'Market Cap',
-      value: moneyFormatter(parseFloat(item.priceUsd)),
+      value: formatter(parseFloat(item.marketCapUsd)),
     },
   ];
+
+  // The 'info' case currently is for values that matches 0, for indicating that hasn't change,
+  // but it can be updated with business logic, eg: if we want to add a range of values for displaying the gray state.
+  // As we are currently displaying only 1 decimal, so small values are not displayed correctly.
+  const badgeType = formatedChangePercent === 0 ? 'info' : formatedChangePercent > 0 ? 'success' : 'error';
 
   return (
     <Card>
@@ -89,15 +94,7 @@ const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props
             <Typo color={colors.gray} sizePx={14}>
               USD
             </Typo>
-            <Badge type={formatedChangePercent >= 0 ? 'success' : 'error'}>
-              <Arrow
-                color={formatedChangePercent >= 0 ? colors.green : colors.red}
-                direction={formatedChangePercent >= 0 ? 'top' : 'bottom'}
-              />
-              <Typo isBold sizePx={14} color={formatedChangePercent >= 0 ? colors.green_bold : colors.red_bold}>
-                {Math.abs(formatedChangePercent).toFixed(1)}%
-              </Typo>
-            </Badge>
+            <ItemBadge type={badgeType} percent={formatedChangePercent} />
           </Row>
         </CashContainer>
       </TouchableOpacity>
@@ -106,6 +103,7 @@ const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props
           {React.Children.toArray(
             details.map((detail) => (
               <Row marginTop={10} justifyContent="flex-start">
+                {/* I would update the labels with a bold font and ':', as with the current format it gets mixed with the value*/}
                 <Typo marginLeft={8}>{detail.label}</Typo>
                 <Typo marginLeft={8}>{detail.value}</Typo>
                 {detail.label === 'Market Cap' && (

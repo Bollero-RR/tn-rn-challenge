@@ -16,6 +16,7 @@ import { useTheme } from 'styled-components';
  * 💯 Using axios great plus
  * 💯 Handle loading and error scenarios, always
  */
+const ITEM_HEIGHT = 100; // value extracted from figma
 
 export default function ListScreen() {
   const { navigateToDetailScreen } = useNavigationHooks();
@@ -36,6 +37,7 @@ export default function ListScreen() {
           <ItemCard item={item} colors={colors} handlePress={() => navigateToDetailScreen(item.id)} />
         )}
         showsVerticalScrollIndicator={false}
+        getItemLayout={(data, index) => ({ length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index })}
       />
     </ScreenContainer>
   );

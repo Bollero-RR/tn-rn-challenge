@@ -1,13 +1,22 @@
 import React from 'react';
-import RNRestart from 'react-native-restart';
+import styled from 'styled-components/native';
+import { useNavigationHooks } from '../../hooks/useNavigationHooks';
 import { Button, ScreenContainer, Typo } from '../ui';
 
+const MessageContainer = styled.View`
+  padding-vertical: 15px;
+`;
+
 const ErrorStateView = () => {
+  const { goBack } = useNavigationHooks();
+  //To.Do change the way I'm handling the reset option. As library I used to implement in previous projects doesn't work on expo.
   return (
-    <ScreenContainer justifyContent="space-around" alignItems="center">
-      <Typo isBold>Oops!</Typo>
-      <Typo>Something went wrong</Typo>
-      <Button text="Reset" handlePress={() => RNRestart.Restart()} />
+    <ScreenContainer justifyContent="center" alignItems="center">
+      <MessageContainer>
+        <Typo isBold>Oops!</Typo>
+        <Typo>Something went wrong</Typo>
+      </MessageContainer>
+      <Button text="GoBack" handlePress={goBack} />
     </ScreenContainer>
   );
 };

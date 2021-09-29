@@ -4,6 +4,8 @@ import { NAVIGATOR } from '../utils/navigation';
 export const useNavigationHooks = () => {
   const navigation = useNavigation();
 
+  const goBack = () => navigation.goBack();
+
   const navigateToToDoScreen = () => navigation.navigate(NAVIGATOR.ToDo);
 
   const navigateToListScreen = () => navigation.navigate(NAVIGATOR.List);
@@ -15,6 +17,7 @@ export const useNavigationHooks = () => {
   const navigateToHomeScreen = () => navigation.navigate(NAVIGATOR.Home);
 
   return {
+    goBack,
     navigateToToDoScreen,
     navigateToListScreen,
     navigateToDetailScreen,

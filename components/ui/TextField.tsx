@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Ref, RefObject } from 'react';
+import { TextInput, TextInputProps } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
+import { InputTypes } from '../../interfaces/form/common';
 
 const Input = styled.TextInput`
   color: white;
@@ -20,26 +22,18 @@ const Error = styled.Text`
 `;
 
 type Props = {
-  placeholder?: string;
-  type: string;
-  onChangeText: (value: string) => void;
-  onBlur: () => void;
-  value?: string;
+  type: InputTypes;
   errorMessage?: string;
-};
+  // To.Do find out the correct type for ref, as none of the bellow types are not working
+  inputRef?: RefObject<TextInput> | Ref<TextInput> | undefined;
+} & TextInputProps;
 
-const TextField = ({ placeholder, type, onChangeText, onBlur, value, errorMessage }: Props) => {
+const TextField = ({ type, errorMessage, inputRef, ...props }: Props) => {
   const { colors } = useTheme();
   return (
     <Container>
-      <Input
-        selectioncolor={colors.primary_light}
-        placeholder={placeholder}
-        secureTextEntry={type === 'password'}
-        onChangeText={onChangeText}
-        onBlur={onBlur}
-        value={value}
-      />
+      {/* @ts-ignore */}
+      <Input ref={inputRef} selectioncolor={colors.primary_light} secureTextEntry={type === 'password'} {...props} />
       <Error>{errorMessage}</Error>
     </Container>
   );

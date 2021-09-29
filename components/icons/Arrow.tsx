@@ -6,7 +6,7 @@ type Props = {
   width?: number;
   height?: number;
   color?: string;
-  direction?: 'top' | 'bottom';
+  direction: 'top' | 'bottom';
 };
 
 const degValue = {

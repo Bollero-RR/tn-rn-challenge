@@ -1,7 +1,3 @@
-export const moneyFormatter = (value: number, remove = 'US') =>
-  new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'USD',
-  })
-    .format(value)
-    .replace(remove, '');
+import numbro from 'numbro';
+
+export const formatter = (value: number) => numbro(value.toFixed(2)).format({ thousandSeparated: true });

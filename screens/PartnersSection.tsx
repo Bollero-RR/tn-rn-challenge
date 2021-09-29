@@ -5,7 +5,8 @@ import { PartnerListHeader, PartenerCard } from '../components/common';
 import { EmptyState } from '../components/common';
 import { ScreenContainer } from '../components/ui';
 
-// As data is not from an api, I would have added aloading indicator
+// As data is not from an api, I would have added aloading indicator.
+// App description is short so we can talk about them at the interview.
 const partnerList = [
   { name: 'Inmediata', url: '#', comments: 'Survey application, data display managment' },
   {
@@ -16,6 +17,8 @@ const partnerList = [
   { name: 'Uplinq', url: '#', comments: 'SMB financial managment dashboard and FI reports section ' },
   { name: 'Space Prision', url: '#', comments: 'Operator dashboard for a VR game at Parque de la Costa. ' },
 ];
+
+const ITEM_HEIGHT = 167; // value extracted from figma
 
 const PartnersSection = () => {
   const { colors } = useTheme();
@@ -28,6 +31,7 @@ const PartnersSection = () => {
         keyExtractor={(item) => item.name}
         ListEmptyComponent={EmptyState}
         showsVerticalScrollIndicator={false}
+        getItemLayout={(data, index) => ({ length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index })}
       />
     </ScreenContainer>
   );
