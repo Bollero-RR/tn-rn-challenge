@@ -77,7 +77,13 @@ const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props
 
   return (
     <Card>
-      <TouchableOpacity onPress={handlePress} disabled={!handlePress}>
+      <TouchableOpacity
+        accessible={!!handlePress}
+        accessibilityLabel="Item Card"
+        accessibilityHint={!!handlePress ? 'Navigate to card Details screen' : 'none'}
+        onPress={handlePress}
+        disabled={!handlePress}
+      >
         <CashContainer marginRight={6}>
           <Row>
             <Typo isBold>{item.symbol}</Typo>
@@ -88,7 +94,7 @@ const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props
         </CashContainer>
         <CashContainer alignItems="flex-end" paddingBottom={16}>
           <Typo isBold color={colors.primary_shadow} sizePx={24}>
-            {formatedPrice}
+            $ {formatedPrice}
           </Typo>
           <Row flex={1} justifyContent="space-between" marginLeft={6}>
             <Typo color={colors.gray} sizePx={14}>
@@ -105,11 +111,15 @@ const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props
               <Row marginTop={10} justifyContent="flex-start">
                 {/* I would update the labels with a bold font and ':', as with the current format it gets mixed with the value*/}
                 <Typo marginLeft={8}>{detail.label}</Typo>
-                <Typo marginLeft={8}>{detail.value}</Typo>
-                {detail.label === 'Market Cap' && (
-                  <Typo marginLeft={8} color={colors.gray} sizePx={14}>
-                    USD
-                  </Typo>
+                {detail.label === 'Market Cap' ? (
+                  <>
+                    <Typo marginLeft={8}>$ {detail.value}</Typo>
+                    <Typo marginLeft={8} color={colors.gray} sizePx={14}>
+                      USD
+                    </Typo>
+                  </>
+                ) : (
+                  <Typo marginLeft={8}>{detail.value}</Typo>
                 )}
               </Row>
             ))

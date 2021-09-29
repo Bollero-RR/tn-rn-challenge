@@ -20,7 +20,7 @@ const ITEM_HEIGHT = 100; // value extracted from figma
 
 export default function ListScreen() {
   const { navigateToDetailScreen } = useNavigationHooks();
-  const { data: items, isLoading, isError } = useItems();
+  const { data: items, isLoading, isError, refetch } = useItems();
   const { colors } = useTheme();
 
   if (isLoading) return <LoadingIndicator />;
@@ -30,6 +30,8 @@ export default function ListScreen() {
   return (
     <ScreenContainer>
       <FlatList
+        onRefresh={refetch}
+        refreshing={isLoading}
         data={items}
         keyExtractor={(item) => item.id}
         ListEmptyComponent={EmptyState}

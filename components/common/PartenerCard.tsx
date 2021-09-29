@@ -27,6 +27,7 @@ const PartenerCard = memo(({ item, colors }: Props) => {
         <Typo>{item.comments}</Typo>
       </TextContainer>
       <TextContainer marginTop={24}>
+        {/*To.Do implement openUrl option if url is available*/}
         <Typo>URL: </Typo>
         <Typo color={colors.gray}>{item.url}</Typo>
       </TextContainer>

@@ -25,7 +25,13 @@ const CustomTab = ({ text, isFocused }: Props) => {
   const { colors } = useTheme();
 
   return (
-    <TabContainer isFocused={isFocused}>
+    <TabContainer
+      accessible={true}
+      isFocused={isFocused}
+      accessibilityRole="tab"
+      accessibilityLabel="Screen section tab"
+      accessibilityHint={`Switch to ${text} section`}
+    >
       <Typo isBold color={isFocused ? colors.primary_light : colors.black}>
         {text}
       </Typo>

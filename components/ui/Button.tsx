@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, TouchableOpacityProps } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 import Typo from './Typo';
 
@@ -16,14 +16,13 @@ const Container = styled.TouchableOpacity<{ isLoading?: boolean }>`
 type Props = {
   handlePress: () => void;
   text: string;
-  disabled?: boolean;
   isLoading?: boolean;
-};
+} & TouchableOpacityProps;
 
-const Button = ({ handlePress, text, isLoading }: Props) => {
+const Button = ({ handlePress, text, isLoading, ...props }: Props) => {
   const { colors } = useTheme();
   return (
-    <Container isLoading={isLoading} onPress={handlePress} disabled={isLoading} accessibilityLabel={`clicked on`}>
+    <Container {...props} isLoading={isLoading} onPress={handlePress} disabled={isLoading}>
       {isLoading ? <ActivityIndicator color={colors.black} /> : <Typo color={colors.white}>{text}</Typo>}
     </Container>
   );

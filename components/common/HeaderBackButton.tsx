@@ -12,8 +12,14 @@ const HeaderLeftContainer = styled.TouchableOpacity`
 
 const HeaderBackButton = (props: StackHeaderLeftButtonProps) => {
   const { colors } = useTheme();
+
   return (
-    <HeaderLeftContainer onPress={props.onPress}>
+    <HeaderLeftContainer
+      accessibilityLabel="Go back"
+      accessibilityHint="Navigates to the previous screen"
+      accessibilityRole="button"
+      onPress={props.onPress}
+    >
       <GoBack />
       {props.label && <Typo color={colors.primary_light}>{props.label}</Typo>}
     </HeaderLeftContainer>

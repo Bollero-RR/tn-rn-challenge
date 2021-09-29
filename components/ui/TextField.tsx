@@ -1,9 +1,9 @@
 import React, { Ref, RefObject } from 'react';
 import { TextInput, TextInputProps } from 'react-native';
-import styled, { useTheme } from 'styled-components/native';
+import styled, { css, useTheme } from 'styled-components/native';
 import { InputTypes } from '../../interfaces/form/common';
 
-const Input = styled.TextInput`
+const Input = styled.TextInput<{ hasError: boolean }>`
   color: white;
   border-width: 1px;
   border-color: ${(p) => p.theme.colors.light_gray};
@@ -11,6 +11,12 @@ const Input = styled.TextInput`
   color: ${(p) => p.theme.colors.black};
   padding: 10px;
   width: 100%;
+
+  ${(p) =>
+    p.hasError &&
+    css`
+      border-color: red;
+    `};
 `;
 
 const Container = styled.View``;
@@ -33,7 +39,13 @@ const TextField = ({ type, errorMessage, inputRef, ...props }: Props) => {
   return (
     <Container>
       {/* @ts-ignore */}
-      <Input ref={inputRef} selectioncolor={colors.primary_light} secureTextEntry={type === 'password'} {...props} />
+      <Input
+        hasError={errorMessage}
+        ref={inputRef}
+        selectioncolor={colors.primary_light}
+        secureTextEntry={type === 'password'}
+        {...props}
+      />
       <Error>{errorMessage}</Error>
     </Container>
   );

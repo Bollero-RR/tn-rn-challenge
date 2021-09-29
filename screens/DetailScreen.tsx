@@ -31,7 +31,12 @@ export default function ListScreen({ route }: DetailScreenProps) {
   return (
     <ScreenContainer>
       {item && <ItemCard item={item} showDetails colors={colors} />}
-      <Button text="My Wallet" handlePress={navigateToWalletScreen} />
+      <Button
+        text="My Wallet"
+        accessibilityLabel="Go to My Wallet button"
+        accessibilityHint="Navigates to My Wallet Screen"
+        handlePress={navigateToWalletScreen}
+      />
     </ScreenContainer>
   );
 }
