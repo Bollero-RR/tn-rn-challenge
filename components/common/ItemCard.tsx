@@ -113,13 +113,17 @@ const ItemCard = memo(({ item, handlePress, showDetails = false, colors }: Props
                 <Typo marginLeft={8}>{detail.label}</Typo>
                 {detail.label === 'Market Cap' ? (
                   <>
-                    <Typo marginLeft={8}>$ {detail.value}</Typo>
+                    <Typo marginLeft={8} testID={`${detail.label} - testid`}>
+                      $ {detail.value}
+                    </Typo>
                     <Typo marginLeft={8} color={colors.gray} sizePx={14}>
                       USD
                     </Typo>
                   </>
                 ) : (
-                  <Typo marginLeft={8}>{detail.value}</Typo>
+                  <Typo marginLeft={8} testID={`${detail.label} - testid`}>
+                    {detail.value}
+                  </Typo>
                 )}
               </Row>
             ))
