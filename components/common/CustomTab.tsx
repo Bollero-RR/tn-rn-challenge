@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components/native';
-import { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components/native';
 import { Typo } from '../ui';
 
 const TabContainer = styled.View<{ isFocused?: boolean }>`

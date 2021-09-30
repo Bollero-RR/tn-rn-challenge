@@ -1,7 +1,7 @@
 import { ActivityIndicator } from 'react-native';
 import React from 'react';
 import { ScreenContainer } from '../ui';
-import { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components/native';
 
 const LoadingIndicator = () => {
   const { colors } = useTheme();

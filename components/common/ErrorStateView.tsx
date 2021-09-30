@@ -9,14 +9,21 @@ const MessageContainer = styled.View`
 
 const ErrorStateView = () => {
   const { goBack } = useNavigationHooks();
-  //To.Do change the way I'm handling the reset option. As library I used to implement in previous projects doesn't work on expo.
+  //To.Do change the way I'm handling the reset option.
+  //As library I used to implement in previous projects doesn't work on expo.
+  // Probably adding the refetch option for queries.
   return (
     <ScreenContainer justifyContent="center" alignItems="center">
-      <MessageContainer>
+      <MessageContainer accessible={true} accessibilityRole="alert">
         <Typo isBold>Oops!</Typo>
         <Typo>Something went wrong</Typo>
       </MessageContainer>
-      <Button text="GoBack" handlePress={goBack} />
+      <Button
+        accessibilityLabel="Go back"
+        accessibilityHint="Navigates to the previous screen"
+        text="GoBack"
+        handlePress={goBack}
+      />
     </ScreenContainer>
   );
 };

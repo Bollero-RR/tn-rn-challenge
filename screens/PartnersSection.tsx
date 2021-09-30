@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components/native';
 import { PartnerListHeader, PartenerCard } from '../components/common';
 import { EmptyState } from '../components/common';
 import { ScreenContainer } from '../components/ui';

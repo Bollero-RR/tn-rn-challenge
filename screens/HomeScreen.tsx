@@ -108,7 +108,12 @@ export default function HomeScreen() {
               ))
             )}
           </InputsContainer>
-          <Button text="Sign in" handlePress={handleSubmit(onSubmit)} isLoading={isLoading} />
+          <Button
+            accessibilityLabel="Press to login"
+            text="Sign in"
+            handlePress={handleSubmit(onSubmit)}
+            isLoading={isLoading}
+          />
         </Container>
       </KeyboardAvoidingView>
     </SafeAreaView>

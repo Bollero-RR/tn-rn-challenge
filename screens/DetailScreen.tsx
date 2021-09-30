@@ -4,7 +4,7 @@ import { DetailScreenProps } from '../interfaces/navigation';
 import { useItemDetails } from '../hooks/useItemDetails';
 import { Button, ScreenContainer } from '../components/ui';
 import { ErrorStateView, ItemCard, LoadingIndicator } from '../components/common';
-import { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components/native';
 
 /**
  * ToDo: Feed the list using fetching data from a RESTful API

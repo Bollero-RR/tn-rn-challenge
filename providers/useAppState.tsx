@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { User } from '../interfaces/user';
 import { getUser, saveUser } from '../utils/secureStorage';
 
@@ -10,7 +10,7 @@ export interface ProviderInterface {
 export const AppStateContext = createContext<any>(undefined);
 
 type Props = {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
 };
 
 export const AppStateProvider = ({ children }: Props) => {

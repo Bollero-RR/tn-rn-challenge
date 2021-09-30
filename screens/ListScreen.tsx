@@ -4,7 +4,7 @@ import { useNavigationHooks } from '../hooks/useNavigationHooks';
 import { useItems } from '../hooks/useItems';
 import { ItemCard, LoadingIndicator, ErrorStateView, EmptyState } from '../components/common';
 import { ScreenContainer } from '../components/ui';
-import { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components/native';
 
 /**
  * ToDo: Feed the list using fetching data from a RESTful API
